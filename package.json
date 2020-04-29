@@ -1,0 +1,49 @@
+{
+  "name": "ya-deployment-action",
+  "version": "1.0.0",
+  "repository": "sergioramos/ya-deployment-action",
+  "license": "BSD-3-Clause",
+  "main": "index.js",
+  "scripts": {
+    "build": "run-p build:*",
+    "build:create": "ncc build src/create --out create --minify",
+    "build:index": "ncc build src/index --out . --minify",
+    "build:remove": "ncc build src/remove --out remove --minify",
+    "fmt": "prettier --config .prettierrc --write '**/*'",
+    "lint": "eslint . --ext .js"
+  },
+  "dependencies": {
+    "@actions/core": "^1.2.3",
+    "@actions/github": "^2.1.1",
+    "apr-for-each": "^3.0.3",
+    "apr-main": "^4.0.3",
+    "got": "^11.0.2",
+    "lodash.isboolean": "^3.0.3"
+  },
+  "devDependencies": {
+    "@zeit/ncc": "^0.22.1",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-config-xo-space": "^0.24.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.1.4",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.0.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged && yarn build"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "prettier --config .prettierrc --write",
+      "git add"
+    ],
+    "*.*": [
+      "prettier --config .prettierrc --write",
+      "git add"
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+name: Yet Another Deployment Action
+author: Sérgio Ramos
+description: Remove all Github Deployments from an environment
+inputs:
+  token:
+    description: "Github repository token"
+    required: true
+  ref:
+    description: "The reference for the deployment"
+    required: true
+  environment:
+    description: "The name of the environment for the deployment"
+    required: true
+runs:
+  using: "node12"
+  main: "index.js"
+branding: 
+  icon: 'cloud-off'
+  color: 'green'

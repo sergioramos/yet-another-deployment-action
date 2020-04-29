@@ -1,0 +1,29 @@
+name: Yet Another Deployment Action
+author: Sérgio Ramos
+description: Github Deployment Action that cleans itself out
+inputs:
+  token:
+    description: "Github repository token"
+    required: true
+  ref:
+    description: "The reference for the deployment"
+    required: true
+  environment:
+    description: "The name of the environment for the deployment"
+    required: true
+  production_environment:
+    description: "Specifies if the given environment is one that end-users directly interact with"
+  environment_url:
+    description: "Sets the URL for accessing your environment"
+  log_url:
+    description: "The full URL of the deployment's output"
+  state:
+    description: "The state of the status"
+  action:
+    required: true
+runs:
+  using: "node12"
+  main: "index.js"
+branding: 
+  icon: 'upload-cloud'
+  color: 'green'
