@@ -1,0 +1,25 @@
+name: Continuous Integration
+
+on: push
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '13.x'
+    - name: Setup Cache
+      uses: actions/cache@v1
+      with:
+        path: .yarn
+        key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
+    - name: Install dependencies
+      run: yarn install --immutable
+      env:
+        YARN_CHECKSUM_BEHAVIOR: update
+    - name: Lint
+      run: yarn run lint
